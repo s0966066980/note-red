@@ -1,0 +1,101 @@
+[
+    {
+        "id": "b4f5c48.f808138",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "88764df0.966b9",
+        "type": "http in",
+        "z": "b4f5c48.f808138",
+        "name": "",
+        "url": "/pin11",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 410,
+        "y": 280,
+        "wires": [
+            [
+                "ffb95845.9754d8"
+            ]
+        ]
+    },
+    {
+        "id": "f0aa038f.f5a34",
+        "type": "rpi-gpio in",
+        "z": "b4f5c48.f808138",
+        "name": "GPIO4",
+        "pin": "29",
+        "intype": "down",
+        "debounce": "25",
+        "read": true,
+        "x": 390,
+        "y": 500,
+        "wires": [
+            [
+                "34d14936.eeba46"
+            ]
+        ]
+    },
+    {
+        "id": "34d14936.eeba46",
+        "type": "function",
+        "z": "b4f5c48.f808138",
+        "name": "Set GPIO",
+        "func": "global.set(\"GPIO\",msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 600,
+        "y": 400,
+        "wires": [
+            [
+                "5e881964.30e938"
+            ]
+        ]
+    },
+    {
+        "id": "ffb95845.9754d8",
+        "type": "function",
+        "z": "b4f5c48.f808138",
+        "name": "Get GPIO",
+        "func": "msg.payload = global.get(\"GPIO\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 600,
+        "y": 280,
+        "wires": [
+            [
+                "78917ed.dd2048",
+                "5e881964.30e938"
+            ]
+        ]
+    },
+    {
+        "id": "78917ed.dd2048",
+        "type": "http response",
+        "z": "b4f5c48.f808138",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 790,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "5e881964.30e938",
+        "type": "debug",
+        "z": "b4f5c48.f808138",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 820,
+        "y": 400,
+        "wires": []
+    }
+]
